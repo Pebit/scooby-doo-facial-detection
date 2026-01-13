@@ -1,0 +1,28 @@
+# --- Python Basics ---
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+.venv/
+
+# --- PyCharm/IDE Settings ---
+.idea/
+.vscode/
+
+# --- PROJECT DATA ---
+# training data
+antrenare/
+
+# --- Temporary/Output ---
+# Any temp images generated while debugging
+*.png
+*.jpg
+
+# Keep possible documentation images
+!assets/
+!docs/images/
+
+# --- Jupyter Notebooks ---
+# Ignores hidden checkpoint folders created by Jupyter
+.ipynb_checkpoints
