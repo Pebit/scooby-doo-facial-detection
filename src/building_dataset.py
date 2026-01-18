@@ -38,9 +38,9 @@ def load_positives():
                     continue
 
                 face = img[ymin:ymax, xmin:xmax]
-                face_resized = cv.resize(face, (parameters.hog_width, parameters.hog_height))
+                face_resized = cv.resize(face, (parameters.HOG_WINDOW_WIDTH, parameters.HOG_WINDOW_HEIGHT))
 
-                save_dir = os.path.join(parameters.DIR_POS_EXAMPLES, character_name)
+                save_dir = os.path.join(parameters.POS_EXAMPLES_DIR, character_name)
                 if not os.path.exists(save_dir):
                     os.makedirs(save_dir)
 
@@ -55,10 +55,10 @@ def load_positives():
 def build_negatives():
     print("\n* Building negatives...")
 
-    negatives_per_img = 5
+    negatives_per_img = parameters.NEG_EXAMPLES_PER_IMAGE
     negative_count = 0
 
-    save_dir = parameters.DIR_NEG_EXAMPLES
+    save_dir = parameters.NEG_EXAMPLES_DIR
 
     random.seed(42)
 
@@ -93,12 +93,12 @@ def build_negatives():
             faces = ground_truth_boxes.get(img_name, [])
             for _ in range(negatives_per_img):
                 for attempt in range(67):
-                    rand_x = random.randint(0, w_img - parameters.hog_width)
-                    rand_y = random.randint(0, h_img - parameters.hog_height)
+                    rand_x = random.randint(0, w_img - parameters.HOG_WINDOW_WIDTH)
+                    rand_y = random.randint(0, h_img - parameters.HOG_WINDOW_HEIGHT)
 
                     cand_xmin, cand_ymin = rand_x, rand_y
-                    cand_xmax = rand_x + parameters.hog_width
-                    cand_ymax = rand_y + parameters.hog_height
+                    cand_xmax = rand_x + parameters.HOG_WINDOW_WIDTH
+                    cand_ymax = rand_y + parameters.HOG_WINDOW_HEIGHT
 
                     has_overlap = False
                     for face in faces:
@@ -123,4 +123,4 @@ def build_negatives():
                         cv.imwrite(os.path.join(save_dir, save_name), crop)
                         negative_count += 1
                         break
-    print(f"\n> Done!\n> Generated {negative_count} negative examples")
+    print(f"\n> Done.\n> Generated {negative_count} negative examples")

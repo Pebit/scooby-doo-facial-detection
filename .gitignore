@@ -12,14 +12,14 @@ venv/
 
 # --- PROJECT DATA ---
 # training data
-antrenare/
+#antrenare/
 
 # --- Temporary/Output ---
-# Any temp images generated while debugging
+# Any temp test_images generated while debugging
 *.png
 *.jpg
 
-# Keep possible documentation images
+# Keep possible documentation test_images
 !assets/
 !docs/images/
 
